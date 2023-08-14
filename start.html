@@ -52,14 +52,56 @@
               Thank you for signing the consent form :)
             </h1>
             <h1 class="start-text1">Lets get started.</h1>
-            <div class="start-btn-group">
-              <a href="task1.html" class="start-navlink button">Start</a>
-            </div>
+            <button id="buttonStart" onclick="window.location.href='task1.html';" style="background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
+              Start
+            </button>
           </div>
-          <div class="start-container2"></div>
         </div>
       </div>
     </div>
-    <script src="Index.js" ></script>
+    <script>
+      // Function to send a request to the Sheety API endpoint
+      function recordButtonClickTime() {
+          // Prepare the data to be sent
+          let body = {
+              sheet1: {
+                  start: new Date().toISOString(),
+              }
+          };
+
+          // Make a request to the Sheety API endpoint
+          fetch('https://api.sheety.co/ac9d61104aace6e40851e1987945c297/1Cp/sheet1', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(body),
+          })
+          .then((response) => response.json())
+          .then(json => {
+              // Handle the API response if needed
+              console.log(json.sheet1);
+              // Redirect to the task1.html page after recording the button click time
+              window.location.href = 'task1.html';
+          })
+          .catch(error => {
+              console.error('Error:', error);
+          });
+      }
+
+      // Load the Google API script asynchronously
+      function loadGoogleApi(callback) {
+          var script = document.createElement('script');
+          script.src = 'https://apis.google.com/js/api.js';
+          script.onload = callback;
+          document.head.appendChild(script);
+      }
+
+      // Set up the event listener after the Google API script is loaded
+      loadGoogleApi(function() {
+          // Add an event listener to the button
+          document.getElementById('buttonStart').addEventListener('click', recordButtonClickTime);
+      });
+    </script>
   </body>
 </html>

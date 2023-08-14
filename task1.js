@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
     const myButton = document.getElementById('myButton');
-    const myButton1 = document.getElementById('myButton1');
+    const myincomplete1 = document.getElementById('myincomplete1');
   
     myButton.addEventListener('click', function() {
       const timestamp = new Date().toLocaleTimeString('en-US', { hour12: true });
   
-      const sheetDbEndpoint = 'https://sheetdb.io/api/v1/tc064nul71i0e'; // Replace with your SheetDB endpoint
-      const apiKey = 'tc064nul71i0e'; // Replace with your SheetDB API key
+      const sheetDbEndpoint = 'https://sheetdb.io/api/v1/ccjnqvvl10qzb'; // Replace with your SheetDB endpoint
+      const apiKey = 'ccjnqvvl10qzb'; // Replace with your SheetDB API key
   
       const data = {
         Task1: timestamp
@@ -28,14 +28,14 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   
-    myButton1.addEventListener('click', function() {
-      const timestamp2 = new Date().toLocaleTimeString('en-US', { hour12: true });
+    myincomplete1.addEventListener('click', function() {
+      const timestamp = new Date().toLocaleTimeString('en-US', { hour12: true });
   
-      const sheetDbEndpoint = 'https://sheetdb.io/api/v1/tc064nul71i0e'; // Replace with your SheetDB endpoint
-      const apiKey = 'tc064nul71i0e'; // Replace with your SheetDB API key
+      const sheetDbEndpoint = 'https://sheetdb.io/api/v1/ccjnqvvl10qzb'; // Replace with your SheetDB endpoint
+      const apiKey = 'ccjnqvvl10qzb'; // Replace with your SheetDB API key
   
       const data = {
-        Task2: timestamp2
+        Incomplete1: timestamp
       };
   
       fetch(`${sheetDbEndpoint}?api_key=${apiKey}`, {

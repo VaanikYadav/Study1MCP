@@ -64,12 +64,12 @@
               below. If not able to complete, mark as incomplete.
             </span>
             <div class="task2-btn-group">
-              <a href="task3.html" class="task2-navlink button">
+              <button id="myButton1" onclick="window.location.href='task3.html';" style="background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
                 Mark as Complete
-              </a>
-              <a href="task3.html" class="task2-navlink1 button">
+              </button>
+              <button id="myincomplete2" onclick="window.location.href='task3.html';" class="task1-navlink1 button">
                 Mark as incomplete
-              </a>
+              </button>
             </div>
           </div>
           <div class="task2-container2">
@@ -83,6 +83,45 @@
         </div>
       </div>
     </div>
-    <script src="Index.js" ></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const markCompleteButton = document.getElementById('markCompleteButton');
+        const markIncompleteButton = document.getElementById('markIncompleteButton');
+  
+        markCompleteButton.addEventListener('click', function() {
+          const timestamp = new Date().toLocaleTimeString('en-US', { hour12: true });
+          sendDataToSheetDB('Task1', timestamp);
+        });
+  
+        markIncompleteButton.addEventListener('click', function() {
+          const timestamp = new Date().toLocaleTimeString('en-US', { hour12: true });
+          sendDataToSheetDB('Incomplete1', timestamp);
+        });
+  
+        function sendDataToSheetDB(key, value) {
+          const sheetDbEndpoint = 'https://sheetdb.io/api/v1/ccjnqvvl10qzb'; // Replace with your SheetDB endpoint
+          const apiKey = 'ccjnqvvl10qzb'; // Replace with your SheetDB API key
+  
+          const data = {
+            [key]: value,
+          };
+  
+          fetch(`${sheetDbEndpoint}?api_key=${apiKey}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          })
+          .then(response => response.json())
+          .then(result => {
+            console.log('Data sent to SheetDB:', result);
+          })
+          .catch(error => {
+            console.error('Error sending data to SheetDB:', error);
+          });
+        }
+      });
+    </script>
   </body>
 </html>
