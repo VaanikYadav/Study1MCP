@@ -116,13 +116,13 @@
 
       // Prepare the data to be sent
       let body = {
-        sheet1: {
+        s1Cp: {
             three: isComplete ? currentTime : 'Incomplete',
         }
       };
 
       // Make a request to the Sheety API endpoint
-      fetch('https://api.sheety.co/ac9d61104aace6e40851e1987945c297/1Cp/sheet1', {
+      fetch('https://api.sheety.co/ac9d61104aace6e40851e1987945c297/pmrh/s1Cp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -132,7 +132,7 @@
       .then((response) => response.json())
       .then(json => {
         // Handle the API response if needed
-        console.log(json.sheet1);
+        console.log(json.s1Cp);
         // Redirect to the task1.html page after recording the button click time
         window.location.href = 'zend.html';
       })
