@@ -1,107 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>Start - MSc HCIT Study 1A</title>
-    <meta property="og:title" content="Start - MSc HCIT Study 1A" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta charset="utf-8" />
-    <meta property="twitter:card" content="summary_large_image" />
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .parent-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 800px;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 800px;
+    padding: 24px;
+    border-radius: 16px;
+    background-color: #222;
+  }
+  .container h1 {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 16px;
+  }
+  .container button {
+    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
 
-    <style data-tag="reset-style-sheet">
-      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
-    </style>
-    <style data-tag="default-style-sheet">
-      html {
-        font-family: Inter;
-        font-size: 16px;
-      }
-
-      body {
-        font-weight: 400;
-        font-style:normal;
-        text-decoration: none;
-        text-transform: none;
-        letter-spacing: normal;
-        line-height: 1.15;
-        color: var(--dl-color-gray-black);
-        background-color: var(--dl-color-gray-white);
-
-      }
-    </style>
-    <link
-      rel="shortcut icon"
-      href="public/vaanik5 dots.png"
-      type="icon/png"
-      sizes="32x32"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
-      data-tag="font"
-    />
-    <link rel="stylesheet" href="./style.css" />
-  </head>
-  <body>
-    <div>
-      <link href="./start.css" rel="stylesheet" />
-
-      <div class="start-container">
-        <div class="start-hero">
-          <div class="start-container1">
-            <h1 class="start-text">
-              Thank you for signing the consent form :)
-            </h1>
-            <h1 class="start-text1">Lets get started.</h1>
-            <button id="buttonStart" onclick="window.location.href='task1.html';" style="background-color: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">
-              Start
-            </button>
-          </div>
-        </div>
-      </div>
+  @media (max-width: 768px) {
+    .parent-container {
+      height: auto;
+    }
+    .container {
+      width: 100%;
+      margin-bottom: 64px; /* Spacing between container and iframe-container */
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="parent-container">
+    <div class="container">
+      <h1>Thank you for signing the consent form.<br>Lets get started.</h1>
+      <button id="myButton">Start</button>
     </div>
-    <script>
-      // Function to send a request to the Sheety API endpoint
-      function recordButtonClickTime() {
-          // Prepare the data to be sent
-          let body = {
-              sheet1: {
-                  start: new Date().toISOString(),
-              }
-          };
+  </div>
+  <script>    // Function to send a request to the Sheety API endpoint
+    function recordButtonClickTime() {
+      // Get the current time in the desired format
+      let currentTime = new Date().toLocaleTimeString('en-US', { hour12: true });
 
-          // Make a request to the Sheety API endpoint
-          fetch('https://api.sheety.co/ac9d61104aace6e40851e1987945c297/1Cp/sheet1', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(body),
-          })
-          .then((response) => response.json())
-          .then(json => {
-              // Handle the API response if needed
-              console.log(json.sheet1);
-              // Redirect to the task1.html page after recording the button click time
-              window.location.href = 'task1.html';
-          })
-          .catch(error => {
-              console.error('Error:', error);
-          });
-      }
+      // Prepare the data to be sent
+      let body = {
+        sheet1: {
+          start: currentTime,
+        }
+      };
 
-      // Load the Google API script asynchronously
-      function loadGoogleApi(callback) {
-          var script = document.createElement('script');
-          script.src = 'https://apis.google.com/js/api.js';
-          script.onload = callback;
-          document.head.appendChild(script);
-      }
-
-      // Set up the event listener after the Google API script is loaded
-      loadGoogleApi(function() {
-          // Add an event listener to the button
-          document.getElementById('buttonStart').addEventListener('click', recordButtonClickTime);
+      // Make a request to the Sheety API endpoint
+      fetch('https://api.sheety.co/ac9d61104aace6e40851e1987945c297/1Cp/sheet1', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      })
+      .then((response) => response.json())
+      .then(json => {
+        // Handle the API response if needed
+        console.log(json.sheet1);
+        // Redirect to the task1.html page after recording the button click time
+        window.location.href = 'task1.html';
+      })
+      .catch(error => {
+        console.error('Error:', error);
       });
-    </script>
-  </body>
+    }
+
+    // Load the Google API script asynchronously
+    function loadGoogleApi(callback) {
+      var script = document.createElement('script');
+      script.src = 'https://apis.google.com/js/api.js';
+      script.onload = callback;
+      document.head.appendChild(script);
+    }
+
+    // Set up the event listener after the Google API script is loaded
+    loadGoogleApi(function() {
+      // Add an event listener to the button
+      document.getElementById('myButton').addEventListener('click', recordButtonClickTime);
+    });
+  </script>
+</body>
+</body>
 </html>
